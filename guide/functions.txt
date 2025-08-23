@@ -1,0 +1,614 @@
+======================== Javascript Knowledge =========================
+; alert("hello world")              // hien thi popup thong bao
+; console.log("hello world")				// xuat thong tin ra console (dev tool)
+; prompt("please type fullname:"); 	// hien thi popup cho nguoi dung nhap thong tin
+
+/* KHAI BAO BIEN TRONG JS
+; var 															// dung truoc es6  
+; let																// dung ke tu es6 tro di
+; const 														// khai bao bien hang so
+
+;; Su Khac Nhau Giua var, let/const
+  ; 1. hoisting: 
+    . var (hoisted: keo len dau scope, co the su dung truoc khi khai bao, nhan gia tri undefined)
+    . let/const (cung hoisted, tuy nhien khong the su dung truoc khi khai bao, bien nam trong temporal dead zone) ; 2. Scope . var (function scope: day len dau function, neu khai bao trong block, no se nhay ra khoi block luon)
+    . let/const (block scope: pham vi trong khoi block khai bao) 
+  ; 3. re-declaration
+    . var (co the khai bao lai)
+    . let/const (khong the khai bao lai)
+
+
+;; Khoi tao bien: 
+var messi = "goat"; 								// khoi tao gia tri 
+
+;; Quy tac dat ten bien:
+- ten bien co the bat dau bang chu cai, dau gach duoi, hoac dau $
+- phan biet hoa thuong (case sensitivity)
+- khong trung voi cac tu khoa js nhu: if, else, var, let, const, ...
+- (Optional): nen tuan theo quy tac camelCase (vd: messiIsTheGoat, superManIsNotReal, ...) 
+
+;; Cac kieu du lieu nguyen thuy (primitive data type)
+. Su dung tu khoa 'typeof' de xuat ra kieu du lieu: console.log(typeof myName);
+- String: kieu du lieu chuoi (3 cach boc chuoi: nhay don (' '), nhay kep(" "), backtick(` `)
+- Number: kieu du lieu so (gom ca so nguyen va so thuc)
+	so nguyen an toan: toi da (Number.MAX_SAFE_INTERGER), toi thieu (Number.MIN_SAFE_INTERGER)
+- Boolean: kieu logic (true/false)
+- Undefined: bien chi khai bao ma khong khoi tao se co kieu nay
+- Null: kieu 'hu khong'
+. Ngoai ra con 2 kieu hien dai la: BigInt va Symbol
+*/
+ 
+
+/* CAC CACH XUAT DU LIEU TRONG JS
+; Cach 1: console.log("Toi ten la " + myName + ", tuoi: " + myAge);
+; Cach 2: console.log("Toi ten la", myName + ',' , "tuoi:", myAge); // cac dau phay ngan cach da bao gom space
+; Cach 3: console.log(`Toi ten la ${myName}, tuoi: $(myAge)`);
+; Cach 4: console.log(`Toi ten la %s, tuoi: %s`, myName, myAge);
+*/
+
+
+/* CAC PHEP TOAN CO BAN TRONG JS
+; cong: tong = a + b;
+; tru: hieu = a - b;
+; nhan: tich = a * b;
+; chia: thuong = a / b;
+; chia lay du: soDu = a % b;
+*/
+
+
+/* EP KIEU SANG KIEU SO
+; parseInt('8') 									// ep sang kieu nguyen
+; parseFloat('8') 								// ep sang kieu float
+
+. Number('8') 										// ep truc tiep sang kieu Number
+. dung ham 'var_name'.toFixed(2) // de ep ve 2 chu so sau dau thap phan
+*/
+
+
+/* EP KIEU SANG KIEU CHUOI 
+; String(8)												// ep so 8 sang kieu chuoi '8'
+*/
+
+
+/* EP KIEU SANG KIEU LOGIC 
+; Gia tri khi ep sang kieu logic tu cac kieu khac goi la: truthy(gt dung), falsy(gia tri sai)
+; Boolean()											// ham ep kieu sang kieu Boolean
+; 8 gia tri se nhan gia tri 'false' sau khi ep kieu bang ham Boolean():
+	false, 0, -0, 0n , "", null, undefined, NaN
+; con lai se nhan gia tri 'true' 
+*/
+
+
+/* CAC PHEP SO SANH TRONG JS
+; giong nhu c++: >, <, >=, <=
+; ngoai ra co them: 
+!=						// so sanh khac (non-type coersion)
+!==					// so sanh khac (type coersion) (vd: "3" != 3 (false) nhung "3" !== 3 (true)
+==						// so sanh bang (non-type coersion)
+=== 					// so sanh bang (type coersion) (vd: "1" == 1 (true) nhung "1" === 1 (false)
+*/
+
+
+/* MOT SO HAM TOAN HOC THONG DUNG
+; Math.sqrt(a) 			// lay can bac 2 cua a
+; Math.pow(a, b) 		// ham mu: a^b
+; Math.abs(a)				// lay tri tuyet doi cua a
+; Math.ceil(a) 			// nang a len so nguyen gan nhat
+; Math.floor(a) 		// ha a xuong so nguyen gan nhat
+; Math.round(a)			// lam tron a (vd: 7.4999 -> 7, 7.5-> 8)
+; a.toFixed(2)			// lam tron a den 2 chu so sau dau thap phan (LUU Y: return string, can ep kieu)
+; Math.min(a, b, c)	// tra ve so be nhat
+; Math.max(a, b, c) // tra ve so lon nhat 
+; Math.random()			// random so thuc ngau nhien tu 0 den ~1 (0.9999999...)
+*/
+
+/* MOT SO VAN DE VOI NUMBER
+; Number(a)				// ep kieu a ve kieu du lieu Number
+; NaN							// 'not a Number' -> typeof van la Number
+; isNaN(a) 				// return (!number || !Number() ? true : false 
+; Number.isNaN(a) // return (NaN) ? true : false; // ket qua cua bieu thuc chinh xac la 'NaN'
+	(vd: isNaN("abc") -> true     but 		Number.isNaN("abc") -> false
+; Number.isInterger() 		// return (Interger) ? true : false
+*/
+
+/* TOAN TU 3 NGOI
+; giong c++ 
+vd: footballKnowledge = (messi == "goat") ? 1 : 0;
+vd: let message = dtb < 5 ? "yeu" : (dtb < 6.5 ? "trung binh" : (dtb < 8 ? "kha" : "gioi"));
+*/
+
+
+/* CAU TRUC RE NHANH 
+. cu phap giong c++:
+;	switch case
+; if else
+*/
+
+
+/* CAU TRUC VONG LAP
+. cu phap giong c++:
+; while loop
+; do while loop
+; for loop
+; van co continue & break 
+*/
+
+
+/* HAM VA GOI HAM TRONG JS
+
+;; < Function declaration >
+;  function addNum(a, b) { return a + b; }    // ham tra ve tong a va b
+;  function subNum(a = 0, b = 0) { return a - b; }      // ham tra ve hieu a va b, voi tham so mac dinh la a = 0, b = 0
+;  function hello() { console.log("hello world!") };      // ham in chuoi "hello world", tra ve kieu undefined
+;  let result = addNum(5, 7);     // goi ham addNum(a, b)
+;  hello();       // goi ham hello()
+
+;; < Function expression >    |   LUU Y: CACH VIET HAM NAY CO ';' O CUOI
+. let sum = function(a, b) { return a + b; };    // ham tinh tong 2 so, khong co ten ham
+. let result = sum(a, b);       // goi bang ten bien va truyen tham so
+
+;; <Arrow function >
+; let multiply = (a, b) => a * b;     // ham tinh tich 2 so
+; let multiplyAndAdd = (a, b) => { let temp = a * b; sum = a + b; return temp + sum; }  // ham tinh tong cua tong va tich
+
+;; Su khac nhau trong 3 cach goi ham nam o hoisting
+  . function declaration : co hoisting, co the goi ham truoc khi dinh nghia no
+  . function expression / arrow function : khong co hoisting, khong the goi ham truoc khi dinh nghia no
+
+;; Ham goi ham (functions calling other functions) va de quy (recursive) giong c++
+
+*/
+
+
+/* Javascript scope
+; global scope: pham vi toan cuc, truy xuat duoc tu moi noi
+; function scope: pham vi ben trong ham 
+; block scope: pham vi trong khoi(ben trong cap ngoac {} )
+*/
+
+
+/* XU LI CHUOI TRONG JS
+
+; co 3 cap dau bieu thi cho chuoi string: `` (backtick), '' (singlequote), "" (doublequote)
+  ( ( rieng `` cho phep xuong dong, hoac dung \n ), ( con '' va "" phai dung \n ) )
+;; 1. index: truy xuat ki tu trong chuoi, chi so bat dau tu 0
+      vd: "hello world"[0]        // lay ki tu 'h'    
+      vd: "hello world".charAt(0) // lay ki tu 'h'
+  ** LUU Y: khi truy xuat INDEX NGOAI CHUOI, operator [] tra ve UNDEFINED, charAt tra ve CHUOI RONG ''
+
+;; 2. Cat Chuoi Trong JS
+. 'hello world'.slice(1, 5)   // cat chuoi trong [1, 5) -> 'ello'  
+. 'hello world'.substring(1, 5)   // cat chuoi trong [1, 5) -> 'ello' -> giong slice
+. 'hello world'.substr(1, 4)   // cat 4 ki tu tinh tu vi tri 1 -> 'ello'
+
+  ** LUU Y: truong hop KHONG nhap index END thi no se CAT tu vi tri START DEN HET CHUOI
+  ** LUU Y: 2 diem khac biet giua slice va substring
+    * hoan doi start, end:
+      - substring(4, 1)     // tu dao thanh [1, 4), van cat dung chuoi
+      - slice(4, 1)         // van giu nguyen [4, 1) -> ""
+    * xu li so am:
+      - substring(-1, -4)   // tu dong chuyen so am thanh 0 -> substring(0, 0)
+      - slice               // hieu so am la chi so theo chieu nguoc lai 
+      vd:   'hello world'.slice(-4, -1) -> 'orl'
+            'hello world'.slice(4, -3) -> 'o wo' 
+            'hello world'.slice(-4, 3) -> ''
+
+;; 3. Xu Li Khoang Trang Trong Chuoi
+. trim()        // xoa toan bo khoang trang 2 dau
+. trimEnd()     // xoa toan bo khoang trang o cuoi
+. trimStart()   // xoa toan bo khoang trang o dau
+
+;;4. Tim kiem chuoi con
+. indexOf(key, [fromIndex]) >_< tra ve index xuat hien lan dau cua chuoi tinh tu fromIndex[optional], neu khong co tra ve -1
+  vd: "abcdef abcdef".indexOf("ab", 0)    ->    0
+. lastIndexOf(key, [endIndex])   >_<  tra ve index xuat hien cuoi cung cua chuoi tinh tu endIndex[optional], neu khong co tra ve -1
+  vd: "abcdef abcdef".lastIndexOf("ab", 13)   -> 7
+. includes(key, [fromIndex])  >_<  kiem tra xem key co xuat hien trong chuoi khong, tinh tu vi tri fromIndex[optional],
+  neu co tra ve true
+  vd: "abcdef abcdef".includes("a", 8) -> false
+
+. startsWith(key, [startIndex])  >_<  kiem tra xem chuoi co bat dau bang key khong, tinh tu vi tri startIndex[optional],
+  neu co tra ve true
+  vd: "abcdef abcdef".startsWith("bc", 1) -> true
+. endsWith(key, [endIndex])  >_<  kiem tra xem chuoi co ket thuc bang key khong, tinh tu vi tri endIndex[optional] - 1,
+  neu co tra ve true
+  vd: "abcdef abcdef".endsWith("f", s.length - 1) -> false
+
+;;5. Phan tach chuoi va tra ve mang
+. string.split(separator, limit) >_< phan tach chuoi string tu cac separator, va tra ve 1 mang co kich thuoc bang limit
+  vd: "nguyen,duc,thuan".split(",", 2) -> ["nguyen", "duc"] // mang string co kich thuoc la 2
+
+;; 6. Cac Ham Xu Li Chuoi Thong Dung
+; 'hello world'.length        // tinh do dai cua chuoi
+; 'hello world'.concat('!', '\n', 'hihi')     // concat cho phep noi nhieu chuoi vao chuoi ban dau
+; 'hello world'.toUpperCase()     // chuyen toan bo sang in hoa -> 'HELLO WORLD'
+; 'hello world'.toLowerCase()     // chuyen toan bo sang in thuong -> 'hello world'
+; replace(old, new) 
+  'hoc, hoc nua, hoc mai'.replace("hoc", "ngu") -> thay chuoi con dau tien tim duoc -> 'ngu, hoc nua, hoc mai'
+  'hoc, hoc nua, hoc mai'.replace(/hoc/g, "ngu") -> thay toan bo chuoi (g - global) -> 'ngu, ngu nua, ngu mai'
+; repeat(count)
+  'hello, '.repeat(3) -> 'hello, hello, hello, '
+; str.padStart(2, "0")      // neu chuoi str khong du 2 ki tu thi no se them 0 vao truoc
+
+*/
+
+
+/* DOI TUONG XU LI NGAY THANG
+;; Khoi tao date
+  ; let date = new Date()        // khoi tao doi tuong thoi gian ngay tai thoi diem khoi tao (mac dinh) (typeof: object)    
+  ; const myDate = new Date(2020, 1, 10, 13, 24, 22, 0)   // khoi tao bang danh sach khoi tao
+  ; const yourDate = new Date("2024-02-15T12:30:45")  // khoi tao bang chuoi string
+;; Getter
+  ; date.getFullYear()           // return nam hien tai (typeof: number)
+  ; date.getMonth() + 1          // return thang hien tai (+1 do bat dau tu 0)
+  ; date.getDate()               // return ngay hien tai
+  ; date.getHours()              // return gio
+  ; date.getMinutes()            // return phut
+  ; date.getSeconds()            // return giay 
+;; Setter: 
+  ; myDate.setFullYear(2026);
+  ; myDate.setMonth(2);
+  ; myDate.setDate(11);
+  ; myDate.setHours(22);
+  ; myDate.setMinutes(22);
+  ; myDate.setSeconds(22);
+;; Timestamp 
+  ; timestamp la 1 con so dai dien cho 1 moc thoi gian nao do (ms), & timestamp: 0 -> 00:00:00 01.01.1970)
+  ; date.getTime()                    // tra ve timestamp cua doi tuong date
+  ; let timestamp = new Date(0)       // khoi tao doi tuong voi timestamp la 0
+    let timestamp2 = new Date(1755408023807); // Sun Aug 17 2025 12:20:23 GMT+0700 
+; Xuat doi tuong Date
+  . console.log(myDate) // in tat ca thong tin cua doi tuong (vd: Sun Aug 17 2025 22:37:12 GMT+0700 (Indochina Time))
+  . console.log(myDate.toLocaleDateString())  // chi in ngay thang nam (vd: 2/10/2020)
+  . console.log(`Ngay ${myDate.getDate()} / Thang ${myDate.getMonth()} / Nam ${myDate.getFullYear()}`)  // cach xuat theo y muon
+*/
+
+
+/* setTimeOut (tu dong thuc hien 1 ham sau 1 khoang thoi gian delay nhat dinh)
+; syntax: 
+  . setTimeOut(function, milliseconds, para1, para2, ...)  // function: truyen function da dinh nghia vao
+    vd: setTimeOut(addSum, 2000, a, b);
+  . setTimeout( functionCode , timeout, para1, para2, ...); // functionCode: dung 1 trong 3 cach dinh nghia function
+    vd1: setTimeOut(() => { console.log("hello world"); }, 2000);
+    vd2: setTimeout(function(a, b) { console.log(a + b)}, 2000, 10, 11);
+    vd3: setTimeout(function hello(a, b) { console.log(a * b)}, 2000, 10, 11);
+; Ham huy (clearTimeOut) :
+  . khi su dung setTimeout de tao mot delay trong viec thuc thi ham, no se tra ve 1 id cua timeout, 
+    can gan id cua timeout vao 1 bien de tham chieu den no va huy khi can
+    vd: let temp = setTimeOut(addSum, 2000, a, b)  // tao delay va gan id cua no vao bien temp
+        clearTimeOut(temp);  // huy thuc hien ham (khong can doi de thuc hien nua)
+*/
+
+
+/* setInterval (lap lai 1 ham sau 1 khoang thoi gian)
+; syntax: giong het setTimeout
+  vd: setInterval(addSum, 1000, a, b);
+; Ham huy (clearInterval): dung tuong tu clearTimeout
+*/
+
+
+/* MANG TRONG JS (trong js, mang la 1 object duoc dinh nghia san, khong giong mang trong c++)
+;; Khai bao voi []
+  . let arr4 = [] // tao ra mot mang rong, tu dong mo rong khi nguoi dung truy cap
+  . let arr1 = [1, 2, true, "messi", [true, "abc", 2.1]];  // co the dat nhieu kieu du lieu ben trong
+;; Khai bao voi Array va contructor
+  . let arr3 = new Array() // tao ra mot mang rong, tu dong mo rong khi nguoi dung truy cap
+  . let arr2 = new Array(1, 2, "three", true); // mang co 4 phan tu: [1, 2, "three", true]
+  . let arr3 = new Array(3)  // voi 1 so nguyen ben trong, no se tao ra mang co dinh 3 phan tu rong, 
+    chu khong phai la [3] nhu ta nghi
+;; Truy xuat phan tu
+  . Dung operator [] -> vd: a[2]
+;; for..of.. (gan giong for each c++, tuy nhien chi xem khong the sua nhu khi dung operator [])
+  vd: for (let element of arr) { console.log(element); }
+;; Mot so thuoc tinh trong mang
+  ; arr.length  // tra ve so phan tu trong mang
+  ; arr.concat(arr1, arr2) // noi mang arr voi arr1, arr2 va tra ve mang moi
+  ; arr.push(3, 3, 1)   // them 1 hoac nhieu phan tu vao cuoi mang arr
+  ; arr.unshift(1, 2, 2)  // them 1 hoac nhieu phan tu vao dau mang arr
+  ; arr.pop() // loai bo phan tu cuoi cung khoi mang arr va tra ve phan tu do de gan vao bien
+    vd: let arr = [1,3] va let num = arr.pop() -> arr = [1] va num = 3
+  ; arr.shift()  // loai bo phan tu dau tien cua mang va tra ve phan tu do de gan vao bien
+  ; let arr1 = arr.slice(1, 3)  // tao ban sao, copy mang arr tu 1 den 2, va gan vao arr1, 
+    neu khong truyen gi copy het mang
+  ; arr.includes(3) // kiem tra xem mang co gia tri 3 khong, return true/false
+  ; arr.indexOf(3) // kiem tra xem so 3 xuat hien lan dau tien o index may, neu khong co return -1
+  ; arr.lastIndexOf(3) // kiem tra xem so 3 xuat hien lan cuoi cung o index may, neu khong co return -1
+  ; arr.reverse() // dao nguoc mang arr
+  ; arr.join('/') // tra ve mot chuoi cac phan tu trong mang duoc ngan cach boi '/',  default: ',' (comma)
+    vd: arr = [1,2,3, 'goat',[1,2]] va arr.join() -> "1,2,3,goat,1,2"
+  ; splice: thay doi cau truc mang, tra ve mang bi xoa de gan vao bien,
+    syntax: arr.splice(start, deleteCount, item1, item2, ...) 
+    vd: arr = [1,2,3,4,5] 
+    . vd1: arr.splice(2, 2) // [1,2,5]
+    . vd2: arr.splice(-2, 2) // [1, 2, 3], idex am thi ta se dem theo chieu nguoc lai
+    . vd3: arr.splice(2,2,'true',false) // [1,2,'true',false,5], chen them 'true', false vao ngay vi tri start
+  ; Toan tu spread: ...<chi moi xuat hien o ES6> <cho phep duyet qua lan luot cac phan tu> 
+    Cac truong hop thuong dung:
+    . clone mang: vd: let M2 = [...M1]  // duyet het mang M1 va copy sang mang M2
+    . Truyen doi so vao ham: vd: number = [1,2,3]; let result = addSum(...number); // truyen lan luot 1,2,3 vao ham addSum
+    . Ket hop mang: vd: arr1 = [1,2], arr2 = [3,4], arr = [...arr1, ...arr2] // -> arr = [1,2,3,4]
+    . them phan tu vao mang: vd: arr = [1,2]; arr = [...arr, 3,4] // -> arr = [1,2,3,4]
+    . tach ki tu trong string: vd: name = "thuan"; char = [...name]; // -> ['t','h','u','a','n']
+;; Sap xep mang
+  ; arr.sort()      // sap xep theo thu tu tang dan theo UNICODE
+    LUU Y: DO SO SANH TUNG VI TRI THEO UNICODE NEN THUONG KHONG NHU Y MUON
+    vd: arr = [1,100, 90, 8000] -> ki vong: [1,90,100,8000] | thuc te: [1,100,8000,90]
+  ; arr.sort(compareFunction) // sap xep theo quy tac mong muon (recommend)
+    vd: arr = [1,100,90,8000]; arr.sort((a,b) => a - b);  // -> [1,90,100,8000]
+;; Ham thuc hien nhanh 1 function voi mang: reduce()
+  ; syntax: arr.reduce((accumulator, currentValue, <currentIndex>, <array>) => { $1 }, <initalValue>)  
+    // chi so currentIndex, mang array va initalValue la optional
+    vd: arr = [1,2,3]; sum = reduce((a, b) => a + b, 0) 
+    // LUU Y: neu khong co initalValue no se lay gia tri dau tien cua mang de khoi tao, mang rong se bao loi
+;; Ham loc phan tu theo ham mong muon: filter
+  ; syntax: arr = filter((currentValue, <currentIndex>, <array>) => {$1}) // currentIndex va array la optional
+    vd: arr = [1, 2, 3, 4, 5, 6]; evenarr = arr.filter((even, index, array) => even % 2 === 0);
+*/
+
+
+/* XEM MA UNICODE CUA KI TU BAT KI
+  ;; 'b'.charCodeAt()   // ->98
+*/
+
+
+/* ============================= LAP TRINH HUONG DOI TUONG - ES1 DEN ES5 ================================
+  ;; Khai bao 1 object
+  vd:  
+  let student = {
+    fullName: "Nguyen Van A",
+    birthYear: 2005,
+    address: {
+      "# district": "Go Vap",  // neu muon dat ten khac quy tac thi bo vao trong dau nhay kep
+      "# city": "Thu Duc",
+    },
+    scores: [8, 9, 10],
+
+    getAge: function () {
+      return 2025 - this.birthYear;
+    },
+
+    getAverageScore: function () {
+      return this.scores.reduce((a, b) => a + b, 0) / this.scores.length;
+    },
+  };
+
+  ;; Truy cap object
+    - c1: student.getAge   // su dung dot nonation
+    - c2: student[getAge]   // su dung bracket nonation
+    vd: student["address"]["# city"] -> Thu Duc
+
+  ;; them, sua, xoa thuoc tinh vao doi tuong co san
+    - them: student.age = 20;   // age chua ton tai -> tao moi
+    - sua: student.birthYear = 2001; // birthYear da ton tai -> sua
+    - xoa: delete student.age // age dang ton tai -> xoa
+
+  ;; cac phuong thuc trong doi tuong Object (duoc built san tren js)
+
+  - Object.keys(obj) -> vd: Object.keys(student); // tra ve 1 mang chua tat ca cac key nam trong doi tuong student
+  - Object.values(obj) -> vd: Object.values(student); // tra ve 1 mang chua tat ca cac gia tri nam trong doi tuong student
+  - Object.entries(obj) -> vd: Object.entries(student); // tra ve 1 mang chua cac mang con, moi mang con la 1 cap key-value trong student
+  - Object.assign(target, source1, source2, ...) <==> Tuong tu dung spread de sao chep: target = {...source1, ...source2};
+      vd: t = {}; a = {age: 10}; Object.assign(t, a); // sao chep cac thuoc tinh tu doi tuong a sang doi tuong t
+  - obj.hasOwnProperty(prop) -> vd: student.hasOwnProperty("fullName") // tra ve true neu co, nguoc lai false
+  - Object.freeze(obj); -> vd: Object.freeze(student); // k the them, sua, xoa trong student nua vi phuong thuc nay dong bang student
+  - Object.seal(obj); -> vd: Object.seal(student); // chi cho phep sua, cam them, xoa 
+
+  ;; LUU Y: NEN SU DUNG CONST de khai bao doi tuong thay cho let/var, de ngan viec vo tinh thay doi doi tuong 
+
+  ;; Function Contructor // gop nhieu thuoc tinh giong nhau vao 1 function de khoi tao cho nhieu doi tuong
+  -- LUU Y: khong dung arrow function de lam ham tao (van de voi this), chi dung function declaration va expression
+  -- QUY UOC: nen viet hoa ca chu cai dau de phan biet voi ham thuong, vd: TaoSinhVien thay vi taoSinhVien
+  -- VI DU CU THE: 
+    function Student(fullName, birthYear, ID, address) {
+      this.fullName = fullName;
+      this.birthYear = birthYear;
+      this.ID = ID;
+      this.address = address;
+
+      this.showInfo = function () {
+        return `${this.fullName}, ${this.birthYear}, ${this.ID}, ${this.address}`;
+      };
+    }
+    const sv1 = new Student("nguyen van a", 2005, "nva2005", "nam dinh"); 
+  -- KIEM TRA: check xem 1 doi tuong co phai la doi tuong cu the cua 1 ham tao khong, ta dung instanceof:
+    vd: sv1 instanceof Student    // true
+
+  ;; Prototype Explained trong OOP JS
+  - Moi doi tuong deu co 1 nguyen mau (Prototype), ngoai tru doi tuong goc(Object: to tien cua moi doi tuong)
+  - Cac doi tuong se KE THUA thuoc tinh va phuong thuc tu Prototype (co the coi la cha me) cua chung
+  - Student.prototype   // tro den [[Prototype]]: Student
+  - Object.getPrototypeOf(sv1)  // tro den nguyen mau cua sv1 -> [[Prototype]]: Student
+  - Kiem chung: 
+    . student.prototype.isPrototypeOf(sv1)    // true
+    . student.prototype === Object.getPrototypeOf(sv1)   // true
+
+  - Them, sua, xoa thuoc tinh vao prototype 
+  vd: them getAge() vao [[Prototype]]: Student
+    Student.prototype.getAge = function() {
+      return 2025 - this.birthYear;
+    }
+    sv1.getAge();  // 20 -> o day sv1 khong truc tiep co phuong thuc getAge(), nhung no ke thua tu nguyen mau cua no: Student
+    . Kiem chung: 
+      sv1.hasOwnProperty("getAge") // false -> do getAge la thuoc tinh cua Student, sv1 chi ke thua
+      sv1.hasOwnProperty("birthYear") // true -> vi birthYear la thuoc tinh thuoc ve sv1
+*/
+
+
+/* ================ LAP TRINH HUONG DOI TUONG - TU ES6 TRO DI ================= 
+  ;; Class
+    class Student {
+      constructor(fullName, birthYear, ID, address) {
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+        this.ID = ID;
+        this.address = address;
+      }
+      showInfo() {
+        return `${this.fullName}, ${this.ID}, ${this.birthYear}, ${this.address}`;
+      }
+    }
+  ;; Khoi tao doi tuong, them, sua, xoa, prototype, ... deu giu nguyen giong kieu OOP cu (<= ES5)
+  ;; LUU Y: phuong thuc trong ES6 class se duoc dua het vao trong [[Prototype]]: <class_name>, 
+    ke ca no duoc khai bao trong class hay them tu Student.prototype
+
+  ;; Instance method & Static method
+    - Instance method: cac phuong thuc gan voi doi tuong cu the, tao doi tuong de goi
+      vd: showInfo() { console.log(`${fullName}, ${ID}, ${birthYear}`)} 
+          sv1.showInfo();   // phuong thuc showInfo khai bao trong class Student, tao doi tuong sv1 de goi
+    - Static method: cac phuong thuc gan voi lop, co the goi truc tiep tu lop
+      vd: static getShool() { return `PTIT`; }
+          Student.getShool();     // goi truc tiep tu lop
+
+  ;; Getter va Setter
+    class School {
+      constructor(_score) {
+        this._score = _score;  
+          // quy uoc rieng cho ltv: dau gach duoi o dau la bien nay duoc bao ve, 
+          khong nen can thiep tu ben ngoai, (neu muon thi van duoc) nhung nen dung getter va setter
+      }
+      get currentScore() {    // khai bao getter
+        return this._score; 
+      }
+      set newScore(score) {   // khai bao setter
+        this._score = score;
+      }
+    }
+    console.log(sv._score);   // van in duoc, nhung khong nen su dung
+    console.log(sv.currentScore); // goi getter, LUU Y: khong co dau '()', hay coi no nhu 1 bien alias chu khong phai ham
+    sv.newScore = 10; // dung setter, LUU Y: cung khong co dau '()', hay coi no nhu 1 alias bien chu khong phai ham
+
+
+<============= 4 tinh chat trong OOP ==================>
+; Tinh dong goi (Encapsulation)
+  - Public fields (truong cong khai) & public method (phuong thuc cong khai): giong nhu cac vi du o tren
+  - private fields (truong rieng tu) & private method (phuong thuc rieng tu): su dung dau # o dau
+    vd: #pin; // khai bao truong #pin la rieng tu, can khai bao truoc tren ham constructor
+        #isValidPin(pin) { return #pin === pin; } // khai bao phuong thuc #isValidPin la rieng tu
+  - Protected: khong duoc dinh nghia trong js, nhung voi lap trinh vien ta quy uoc bang dau gach duoi nhu vi du tren kia
+
+; Tinh ke thua (Inheritance)
+  vd:
+    class School {
+      constructor(ID, fullName, birthYear) {
+        this.ID = ID;
+        this.fullName = fullName;
+        this.birthYear = birthYear;
+      }
+      showInfo() {
+        console.log(
+          `FullName: ${this.fullName}, ID: ${this.ID}, BirthYear: ${this.birthYear}`
+        );
+      }
+    }
+
+    class Teacher extends School {}   // Class Teacher ke thua toan bo School, va khong co them gi
+
+    class Student extends School {
+      constructor(ID, fullName, birthYear, major) {
+        super(ID, fullName, birthYear);   // goi ham tao cua class cha: School
+        this.major = major;     // dinh nghia thuoc tinh moi: major
+      }
+    }     // class Student nay se ke thua toan bo School, va co them thuoc tinh major
+
+
+; Tinh da hinh (Polymorphism): the hien giong trong c++ da hoc 
+; Tinh truu tuong (Abstraction): the hien giong trong c++ da hoc
+*/
+
+
+
+/* ============ BOM - Browser Object Model ================
+
+1. Dinh nghia: BOM la mot phan cua moi truong trinh duyet web (khong thuoc js), cung cap giao dien de tuong tac voi cac thanh 
+  phan cua trinh duyet -> cac trinh duyet co the co BOM khac nhau nhung cau truc co ban thi giong nhau
+
+2. Mo hinh cua BOM: 
+  Window > Document(DOM) + Screen + Location + History + Navigator
+
+  + Document(DOM): kha nhieu kien thuc, se tim hieu sau
+  + Screen: doi tung man hinh, cung cap thong tin ve man hinh cua user nhu: do phan giai, kich thuoc, so luong mau, ...
+  + Location: doi tuong vi tri dai dien cho URL hien tai cua trinh duyet, tuong tac voi cac thanh phan URL: protocol, port, path, hostname,...
+  + History: doi tuong lich su, cho phep tuong tac voi lich su trinh duyet cua user, nhu dieu huong den trang truoc do hoac sau do,...
+  + Navigator: doi tuong dieu huong chua thong tin ve trinh duyet nguoi dung: ten, phien ban trinh duyet, os, ...,
+    thuong dung nhat la: userAgent (de phan tich user dang dung thiet bi nao)
+*/
+
+
+/* ============ DOM - Document Object Model ===============
+
+1. Dinh nghia: thuoc BOM, la 1 phan cua trinh duyet, khong phai cua js
+  DOM xem tai lieu HTML hoac XML nhu mot cay doi tuong, trong do moi nut (node) dai dien cho 1 phan cua tai lieu, ta co
+  the chon va thay doi bat cu phan nao cua tai lieu
+2. Cau truc DOM: 
+- Document node: dai dien cho toan bo tai lieu HTML
+- Element node: node phan tu (<div>, <span>, <h1>, <p>, ...)
+- Text node: van ban ben trong phan tu (<h1>Title</h1>   thi Title la text_node)
+- Attribute node: note thuoc tinh (href, src, target, ...)
+- Comment node: cac comment (<!-- day la node comment -->)
+3. DOM API
+- API la mot cong cu trung gian giup cac phan mem hoac ung dung giao tiep voi nhau 
+- DOM API la 1 bo cac phuong thuc va thuoc tinh ma JS cung cap de tuong tac voi DOM
+
+    <========= Mot so DOM API thuong dung do JS cung cap ==========>
+  3.1. Xem hoac sua noi dung
+    - <element>.innerHTML   // in ra noi dung text trong element
+    - <element>.innerHTML = "hello";      // sua noi dung text trong element
+    - Ngoai ra con co 2 thuoc tinh tuong tu: innerText & textContent
+    - su khac nhau giua 3 thuoc tinh nay: 
+      * getter
+        + innerText: chi hien thi noi dung nhin thay tren trang web (neu dung display:none de an di thi phan an se khong thay)
+        + textContent: lay noi dung trong tep html, bao gom ca khoang trang, tab,... (khong lay cac the)
+        + innerHTML: lay toan bo doan ma, bao gom ca noi dung va cac the boc ben ngoai
+      * setter
+        + <element>.innerHTML = "<p><i>tuhoc</i></p>" -> tuhoc (co in nghieng) -> no chuyen ma sang HTML
+        + <element>.textContent = "<p><i>tuhoc</i></p>" -> <p><i>tuhoc</i></p> -> no giu nguyen text (innerText cung vay)
+  3.2. Mot so phuong thuc getElement
+    - getElementsByTagName("h1");    // tra ve 1 mang cac the h1 (tinh tu vi tri dang dung) 
+    - getElementsByClassName("fa-brands")    // tra ve 1 mang cac phan tu nam trong class fa-brands
+    - Vi la mang nen ta gan no vao 1 bien va dung chi so index de truy cap va thuc hien chinh sua 
+    - getElementByID("author")    // tra ve phan tu mang ID do
+  3.3. querySelector & querySelectorAll
+    - querySelector("ul a")  // CHI tra ve PHAN TU DAU TIEN thoa man bo chon combinators "ul a", ngoai ra van co the dung id, class, elements,...
+    - querySelectorAll("ul a")    // khac o tren la tra ve mot MANG cac phan tu thoa man 
+  3.4. Using attribute 
+    - getAttribute("href")      // lay gia tri cua thuoc tinh href trong phan tu
+    - setAttribute("style", "color: yellow")      // thay doi thuoc tinh style voi gia tri "color: yellow"
+    - hasAttribute("style")     // kiem tra xem phan tu co thuoc tinh style khong, tra ve true neu co
+    - removeAttribute("class")  // xoa thuoc tinh class khoi phan tu
+  3.5. Using DOM Style 
+    - <element>.style.fontSize: "40px"      // thay doi css cua element thanh 40px
+    - Object.assign(<element>.style, { fontSize: "40px", color: "red",});   // dung assign de sao chep doi tuong cac thuoc tinh vao <element>.style
+      (voi 2 cach tren chi xem va thay doi duoc inline css, khong xem duoc externel hay internel css)
+    - window.getComputedStyle(doc)      // xem toan bo thong so css ma trinh duyet dang nhan, doc la ten bien, de truy cap thuoc tinh ta dung dot nonation
+    - LUU Y: Dung CAMELCASE de viet css, chu khong dung ten css nhu o phan html-css
+      (chi tiet xem tai: https://www.w3schools.com/jsref/dom_obj_style.asp)
+  3.6. classList    : quan li va thao tac voi class
+    - <element>.classList.add("newClass")     // them class 'newClass' vao phan tu
+    - <element>.classList.contains("currentClass")    // kiem tra xem phan tu co chua class 'currentClass' khong
+    - <element>.classList.remove("oldClass")      //   xoa class 'oldClass' khoi phan tu
+    - <element>.classList.replace("oldClass", "newClass")     // thay the class 'oldClass' thanh 'newClass'
+    - <element>.classList.toggle("toggleClass")     // neu class 'toggle' chua co thi them vao, co roi thi xoa di
+  3.7. Truy cap parent, child & siblings
+    - <element>.parentElement     // truy cap vao phan tu cha cua element
+    - <element>.children      // tra ve 1 mang cac con cua phan tu element
+    - <element>.children[1].nextElementSibling    // truy cap vao phan tu ae ke tiep (tuc la index 2)
+    - <element>.children[1].previousElementSibling    // truy cap vao phan tu ae truoc do (tuc la index 0)
+  3.8. Append va prepend : them phan tu
+    - let elm1 = document.createElement(" <element> ");   // phai tao phan tu moi
+        (tuong tu khai bao them elm2, elm3,...)
+    - <element>.append(elm1, elm2, "something else")      // them nhieu phan tu vao CUOI phan tu element
+    - <element>.prepend(elm1, elm3, ".vv")                // them nhieu phan tu vao DAU phan tu element
+  3.9. So sanh append voi appendChild: 
+    - Doi tuong co the them: 
+      * appendChild chi them duoc Node (<element>)
+      * append them duoc ca Node va chuoi van ban
+    - Tra ve gia tri
+      * appendChild tra ve <element>
+      * append khong co gia tri tra ve (undefined)
+    - Them nhieu phan tu: 
+      * appendChild chi them 1 phan tu moi lan goi
+      * append co them nhieu phan tu hoac chuoi van ban trong 1 lan goi
+  3.10. remove & removeChild: xoa phan tu DOM
+    - <element>.parentElement.removeChild(<element>)      // phuc tap hon, vi phai xac dinh ca phan tu cha va con, ho tro hau het browser
+    - <element>.remove()      // don gian hon, tuy nhien 1 so browser cu khong ho tro 
+*/

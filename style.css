@@ -1,0 +1,36 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #1d4d69;
+  background: linear-gradient(
+    90deg,
+    rgba(29, 77, 105, 1) 0%,
+    rgba(84, 161, 116, 1) 50%,
+    rgba(237, 221, 83, 1) 100%
+  );
+}
+
+.digital-clock {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #3e3e3e;
+}
+
+#clock {
+  color: aqua;
+  font-size: 2em;
+}
+
+.test {
+  color: yellow;
+  font-size: 2rem;
+  background-color: red;
+}
