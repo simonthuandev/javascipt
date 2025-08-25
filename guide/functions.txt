@@ -23,9 +23,7 @@ var messi = "goat"; 								// khoi tao gia tri
 
 ;; Quy tac dat ten bien:
 - ten bien co the bat dau bang chu cai, dau gach duoi, hoac dau $
-- phan biet hoa thuong (case sensitivity)
-- khong trung voi cac tu khoa js nhu: if, else, var, let, const, ...
-- (Optional): nen tuan theo quy tac camelCase (vd: messiIsTheGoat, superManIsNotReal, ...) 
+- phan biet hoa thuong (case sensitivity) khong trung voi cac tu khoa js nhu: if, else, var, let, const, ... (Optional): nen tuan theo quy tac camelCase (vd: messiIsTheGoat, superManIsNotReal, ...) 
 
 ;; Cac kieu du lieu nguyen thuy (primitive data type)
 . Su dung tu khoa 'typeof' de xuat ra kieu du lieu: console.log(typeof myName);
@@ -298,8 +296,9 @@ vd: let message = dtb < 5 ? "yeu" : (dtb < 6.5 ? "trung binh" : (dtb < 8 ? "kha"
     chu khong phai la [3] nhu ta nghi
 ;; Truy xuat phan tu
   . Dung operator [] -> vd: a[2]
-;; for..of.. (gan giong for each c++, tuy nhien chi xem khong the sua nhu khi dung operator [])
+;; + for..of.. //gan giong for each c++, tuy nhien chi xem khong the sua nhu khi dung operator []
   vd: for (let element of arr) { console.log(element); }
+   + arr.forEach((item) => { console.log(item)} )   // kieu forEach cua js
 ;; Mot so thuoc tinh trong mang
   ; arr.length  // tra ve so phan tu trong mang
   ; arr.concat(arr1, arr2) // noi mang arr voi arr1, arr2 va tra ve mang moi
@@ -611,4 +610,65 @@ vd: let message = dtb < 5 ? "yeu" : (dtb < 6.5 ? "trung binh" : (dtb < 8 ? "kha"
   3.10. remove & removeChild: xoa phan tu DOM
     - <element>.parentElement.removeChild(<element>)      // phuc tap hon, vi phai xac dinh ca phan tu cha va con, ho tro hau het browser
     - <element>.remove()      // don gian hon, tuy nhien 1 so browser cu khong ho tro 
+
 */
+
+
+/* ================= DOM EVENT ===================
+  A) ----------> Inline event: 
+    - Dung nhu 1 thuoc tinh (attribute) trong cac phan tu
+    - Uu diem: co the code truc tiep trong file html ma khong can dung js
+    - Nhuoc diem: khien file HTML tro nen cong kenh, kho xu li, kho tai su dung
+  vd1: <button onlick="alert('hello world')">click me</button> 
+  vd2: <button onlick=" this.style.backgroundColor='yellow' ">click me</button>     // dung this de tro vao phan tu dang xet
+
+  B) ----------> DOM LEVEL 0 Event Handling
+    - Day la phuong phap xu li su kien thoi ki dau cua DOM API
+    - Su dung bang cach gan 1 su kien 1 ham (function)
+    - Uu diem: khac phuc tinh cong kenh cua inline event & de dang tai su dung voi function declaration
+    - Nhuoc diem: khong the gan nhieu su kien cho cung 1 phan tu vi cac su kien sau se ghi de su kien truoc 
+  vd1: button1.onclick = function() { alert("hello world"); }   // dung function expression
+  vd2: button2.ondblclick = () => { alert("hello world"); }     // dung arrow function
+  vd3: function keyPressHander() { alert("hello world"); }   
+       button3.onkeypress = keyPressHander;     // dung function declaration, LUU Y: khong dong mo ngoac '()', vi day la gan ham, chu khong phai goi ham
+  
+  C) ----------> DOM LEVEL 2 addEventListener
+    - Su dung de goi ham khi ma su kien chi dinh duoc xay ra
+    - Uu diem: khac phuc moi van de cua inline event & Event Handling
+    - Nhuoc diem: chua thay
+    - Cu phap them su kien: <elememt>.addEventListener(event, function, options)  || options: la 1 doi tuong (khong bat buoc)
+    - Cu phap xoa su kien: <elememt>.removeEventListener(event, function) 
+  vd1: button1.addEventListener("click", () => { alert("hello world"); })     // LUU Y: onclick la ten thuoc tinh, con su kien chi ghi la 'click' thoi 
+  vd2: button2.removeEventListener("click", handleclick)      // gia su da co su kien click voi ham handelClick, thi code nay se xoa di su kien do
+  vd3: button3.addEventListener("keypress", handleClick, { once: true }); // them su kien voi options { once: true } nghia la chi ap dung su kien nay lan dau tien  
+  
+  D) ----------> EVENT OBJECT
+    - la mot doi tuong chua thong tin ve 1 su kien cu the khi no xay ra  (click chuot, nhan phim , di chuot, tai trang, ...)
+    - khi dung addEventListener hoac DOM Level 0 hoac inline event, no deu mac dinh tra ve EventObject, co the truyen tham so event (hoac ten bat ki) de xem:
+    vd: button.addEventListener("keydown", function(ev) { console.log(ev); })   // in ra event object khi nhan phim
+    - Mot so thuoc tinh thuong dung trong event object: 
+      + type: kieu su kien (click, keydown, keyup, ...)
+      + target: phan tu ma su kien da xay ra 
+      + clientX, clientY: toa do con tro chuot (so voi goc tren ben trai cua viewport) 
+      + key: phim da nhan
+      + code: dai dien cho 1 ki tu tren ban phim 
+      + preventDefault() : ham ngan chan hanh vi mac dinh cua su kien (xem them tai: https://www.youtube.com/watch?v=mUbP-ws7bcs&list=PLPt6-BtUI22pYwpfmkP4EuJkf6GRe63KU&index=132)
+      + stopPropagation(): ham ngan chan su kien lan truyen (xem them tai: https://www.youtube.com/watch?v=yC6nH_Z6DWg&list=PLPt6-BtUI22pYwpfmkP4EuJkf6GRe63KU&index=135)
+      + . capture: true // lan truyen theo chieu nguoc lai, thuoc phan options trong addEventListener(), default: false
+        . stopImmediatePropagation(): ngan chan su kien cua cung 1 element
+        (xem them tai: https://www.youtube.com/watch?v=vWYA-PG8s4g&list=PLPt6-BtUI22pYwpfmkP4EuJkf6GRe63KU&index=136)
+      + event delegation: su kien duoc giao pho tu phan tu cha xuong phan tu con (su dung event.target)
+        (xem them tai: https://www.youtube.com/watch?v=a-PJP68k7ZM&list=PLPt6-BtUI22pYwpfmkP4EuJkf6GRe63KU&index=137)
+    - Mot so su kien trong event object: 
+      + change: su kien xay ra khi gia tri thay doi va mat focus (thuong xuat hien trong input)
+      + submit: su kien xay ra khi nhan vao input submit trong khoi form
+      + input: su kien xay ra khi nguoi dung thuc hien bat ki hanh dong nhap lieu nao
+
+  D) ----------> Cac su kien thuong dung: 
+    - onclick: su kien click chuot trai
+    - ondblclick: su kien nhap dup chuot trai
+    - onmouseover: su kien di chuot vao
+    - onmouseleave: su kien di chuot ra
+    - onkeypress: su kien nhan phim
+
+*
