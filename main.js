@@ -1,39 +1,54 @@
-// function automaticClockRender() {
-//   const time = new Date();
-//   const hour = String(time.getHours()).padStart(2, "0");
-//   const minute = String(time.getMinutes()).padStart(2, "0");
-//   const second = String(time.getSeconds()).padStart(2, "0");
-//   const timeString = `${hour}:${minute}:${second}`;
-//   document.getElementById("clock").innerHTML = timeString;
-// }
-// setInterval(automaticClockRender, 1000);
+const progress = document.getElementById("progress");
+const prev = document.getElementById("prev");
+const next = document.getElementById("next");
+const steps = document.querySelectorAll(".step");
 
-// const changeColorButton = document.getElementById("btn");
-// const title = document.getElementById("title");
-// function randomColor() {
-//   let r = Math.floor(Math.random() * 256),
-//     g = Math.floor(Math.random() * 256),
-//     b = Math.floor(Math.random() * 256);
-//   let colorString = `rgb(${r}, ${g}, ${b})`;
-//   changeColorButton.parentElement.style.background = colorString;
-//   title.innerText = colorString;
-// }
-// changeColorButton.addEventListener("click", randomColor);
-// let container = document.querySelector(".container");
-// container.addEventListener("click", function (e) {
-//   if (e.target !== container) {
-//     let currentActive = document.querySelector(".panel.active");
-//     currentActive.classList.remove("active");
-//     e.target.classList.add("active");
-//   }
-// });
-let panelList = document.querySelectorAll(".panel");
+let currentActive = 0;
 
-panelList.forEach((panel) => {
-  panel.addEventListener("click", function(e) {
-    let currentActive = document.querySelector(".panel.active");
-    currentActive.classList.remove("active");
-    panel.classList.add("active");
-    console.log(e.target);
+function update() {
+  steps.forEach(function (step, idx) {
+    if (idx < currentActive) {
+      step.classList.add("active");
+    } else {
+      step.classList.remove("active");
+    }
   });
+  // Tuong minh:
+  // for (let idx = 0; idx < steps.length; idx++) {
+  //   if (idx < currentActive) {
+  //     steps[idx].classList.add("active");
+  //   } else {
+  //     steps[idx].classList.remove("active");
+  //   }
+  // }
+  // progress.style.width = `${(currentActive - 1) * 33.33}%`;
+
+  // Tong quat: 
+  progress.style.width = `${(currentActive - 1) / (steps.length - 1) * 100}%`;
+
+  // Tuong minh:
+  // if (currentActive <= 0) {
+  //   prev.disabled = true;
+  // }
+  // else if (currentActive >= 4) {
+  //   next.disabled = true;
+  // }
+  // else {
+  //   prev.disabled = false;
+  //   next.disabled = false;
+  // }
+  prev.disabled = currentActive === 0;
+  next.disabled = currentActive === steps.length;
+}
+function changeStep(step) {
+  currentActive += step;
+  update();
+}
+
+next.addEventListener("click", function () {
+  changeStep(1);
+});
+
+prev.addEventListener("click", function () {
+  changeStep(-1);
 });
