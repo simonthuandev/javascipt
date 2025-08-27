@@ -3,23 +3,25 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Progress bar</title>
+    <title>Search Box</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
+      integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <h1>Event JS - Mini Project 3</h1>
-    <div class="progress-wrapper">
-      <div class="progress" id="progress"></div>
-      <div class="step">1</div>
-      <div class="step">2</div>
-      <div class="step">3</div>
-      <div class="step">4</div>
-      <!-- <div class="step">5</div>
-      <div class="step">6</div> -->
-    </div>
-    <div class="btn-group">
-      <button class="btn" id="prev" disabled>prev</button>
-      <button class="btn" id="next">next</button>
+    <h1>Event JS - Project 04</h1>
+    <div class="search-group">
+      <div class="search-box active">
+        <input type="text" id="input1" class="input_search" placeholder="Nhập nội dung tìm kiếm" />
+        <button class="icon">
+          <i class="fa-solid fa-magnifying-glass"></i>
+        </button>
+      </div>
     </div>
     <script src="./main.js"></script>
   </body>
