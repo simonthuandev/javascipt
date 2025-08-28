@@ -7,72 +7,63 @@ html {
 }
 
 body {
-  background-color: blueviolet;
   font-size: 1.6rem;
+  background: #215685;
+  background: linear-gradient(90deg, rgba(33, 86, 133, 1) 0%, rgba(34, 133, 75, 1) 50%, rgba(237, 221, 83, 1) 100%);
 }
 
 h1 {
   font-size: 4.8rem;
-  text-align: center;
   background-color: cyan;
   max-width: 80vw;
-  margin: 0 auto 80px;
-  border-radius: 30px;
+  text-align: center;
+  margin: 0 auto;
+  border-radius: 999px;
   padding: 0 20px;
 }
 
-.search-group {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.search-box {
-  position: relative;
-  height: 50px;
-}
-
-.input_search {
-  border: none;
+.btn {
+  font-size: 2.2rem;
+  background-color: purple;
+  color: #fff;
+  border: 1px solid purple;
   border-radius: 15px;
-  background: #fff;
-  font-size: 1.8rem;
-  padding: 15px;
-  height: 50px;
-  width: 50px;
-  transition: 0.7s;
-}
-.icon {
-  background: #fff;
-  width: 50px;
-  height: 50px;
-  border-radius: 15px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: none;
   cursor: pointer;
-  position: absolute;
-  top: 0;
-  left: 0;
-  font-size: 2.4rem;
+  letter-spacing: 2px;
+  padding: 20px 30px;
+  box-shadow: 10px 10px 15px 9px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 15px 9px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 15px 9px rgba(0, 0, 0, 0.75);
+  position: relative;
+  overflow: hidden;
 }
 
-.search-box.active .input_search{
-  width: 350px;
-  /* text-align: center; */
-  padding-left: 55px;
-}
-
-.icon:focus,
-.input_search:focus {
+.btn:focus {
   outline: none;
 }
 
-.fa-magnifying-glass {
-  color: #ccc;
+.btn:hover {
+  opacity: 0.9;
 }
-.search-box.active .fa-magnifying-glass {
-  color: blueviolet;
-  transition: 0.7s;
+.button-group {
+  margin: 80px 0 0;
+  display: flex;
+  justify-content: center;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: #fff;
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+  animation: scale 0.5s ease-out;
+  border-radius: 50%;
+}
+
+@keyframes scale {
+  to {
+    transform: translate(-50%, -50%) scale(3);
+    opacity: 0;
+  }
 }

@@ -21,7 +21,7 @@
 ;; Khoi tao bien: 
 var messi = "goat"; 								// khoi tao gia tri 
 
-;; Quy tac dat ten bien:
+;; QUY TAC DAT TEN BIEN:
 - ten bien co the bat dau bang chu cai, dau gach duoi, hoac dau $
 - phan biet hoa thuong (case sensitivity) khong trung voi cac tu khoa js nhu: if, else, var, let, const, ... (Optional): nen tuan theo quy tac camelCase (vd: messiIsTheGoat, superManIsNotReal, ...) 
 
@@ -60,10 +60,10 @@ var messi = "goat"; 								// khoi tao gia tri
 
 . Number('8') 										// ep truc tiep sang kieu Number
 . dung ham 'var_name'.toFixed(2) // de ep ve 2 chu so sau dau thap phan
-*/
+*
 
 
-/* EP KIEU SANG KIEU CHUOI 
+/* EP KIEU SANG KIEU CHUOI
 ; String(8)												// ep so 8 sang kieu chuoi '8'
 */
 
@@ -342,6 +342,37 @@ vd: let message = dtb < 5 ? "yeu" : (dtb < 6.5 ? "trung binh" : (dtb < 8 ? "kha"
 ;; Ham loc phan tu theo ham mong muon: filter
   ; syntax: arr = filter((currentValue, <currentIndex>, <array>) => {$1}) // currentIndex va array la optional
     vd: arr = [1, 2, 3, 4, 5, 6]; evenarr = arr.filter((even, index, array) => even % 2 === 0);
+
+;; Phuong thuc map() trong Array
+  ; dung de tao mang moi tu mang ban dau bang cach ap dung 1 ham (callback) cho moi phan tu cua mang do, giup chuyen doi, 
+    xu li du lieu de dang ma khong thay doi mang goc 
+  ; syntax: 
+    let newArray = array.map(
+      function(currentValue, index, arr) {
+        // return gia tri moi cho phan tu cua mang moi
+      }, thisArg);
+    trong do: - currentValue: phan tu cua mang hien tai
+              - index (optional): vi tri cua phan tu hien tai
+              - arr (optional): mang goc 
+              - thisArg (optional): gia tri dung lam this khi goi callback
+  ; vi du 1: 
+    const numbers = [1, 2, 3, 4, 5, 6];
+    const doubled = numbers.map(function(num) {
+      return num * 2;
+    })
+    => doubled = [2, 4, 6, 8, 10, 12]
+  ; vi du 2:
+    const config = {
+      calculate(value) {
+        return value * 3;
+      },
+    };
+    const arr1 = [1, 2, 3, 4];
+    const arr2 = arr1.map(function (currentValue, index, arr1) {
+      console.log(arr1[index]);
+      return this.calculate(currentValue);
+    }, config);
+    => trong vi du nay thisArg la doi tuong config
 */
 
 
